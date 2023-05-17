@@ -1,8 +1,11 @@
+import sys
+
 from okta.errors.error import Error
 
 
 class OktaAPIError(Error):
     def __init__(self, url, response_details, response_body):
+        print(response_body, file=sys.stderr)
         self.status = response_details.status
         self.error_code = response_body.get("errorCode", None)
         self.error_summary = response_body.get("errorSummary", "")
